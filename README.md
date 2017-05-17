@@ -1,2 +1,3 @@
-# mysurrey-app
-App from MySurrey Portal
+#react redux boilerplate
+
+React Redux Boilerplate
