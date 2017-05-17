@@ -26,7 +26,7 @@ const NavBar = props => (
   <StyleRoot>
     <div style={styles.root}>
       <div style={styles.search}>
-        <div>MYSURREY PORTAL</div>
+        <div>BPBP</div>
         <div style={[styles.minimized]}><input type="text" placeholder="Search for services" /></div>
       </div>
       <div style={styles.search}>
