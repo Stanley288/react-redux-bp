@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # - $HOME/.ssh:/root/.ssh:ro
+    # environment:
+    #   - GITHUB_RELEASE_ACCESS_TOKEN
+    # depends_on:
+    #   - lambo
+
+  mysurrey-app:
+    build: .
+    image: cityofsurrey/mysurrey-app
+    ports:
+      - '80:80'
+    networks:
+      - frontend
+    labels:
+      ca.surrey.swarm.cluster: mysurrey-app
+    deploy:
+      replicas: 4
+      update_config:
+        parallelism: 2
+        delay: 10s
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 128M
+      restart_policy:
+        condition: on-failure
+
+networks:
+  frontend:
+  backend:

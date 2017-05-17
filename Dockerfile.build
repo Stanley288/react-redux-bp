@@ -1,0 +1,10 @@
+FROM cityofsurrey/node
+
+RUN echo http://dl-6.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
+RUN apk add --no-cache --update docker && \
+    rm -rf /var/cache/apk/*
+
+RUN mkdir -p /app
+COPY . /app/
+
+WORKDIR /app

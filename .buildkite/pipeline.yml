@@ -1,0 +1,57 @@
+steps:
+  - command: scripts/docker-cleanup.sh
+    label: ":toilet:"
+
+  - command: scripts/build-image.sh
+    label: ":hammer: :docker:"
+    env:
+      BUILDKITE_DOCKER_COMPOSE_CONTAINER: builder
+
+  - wait
+
+  # - command: scripts/test-unit.sh
+  #   label: ":eslint: :new_moon_with_face: :partyparrot:"
+  #   env:
+  #     BUILDKITE_DOCKER_COMPOSE_CONTAINER: mysurrey-app
+  #
+  # - command: scripts/test-integration.sh
+  #   label: ":llama:"
+  #   env:
+  #     BUILDKITE_DOCKER_COMPOSE_CONTAINER: mysurrey-app-test
+  #
+
+  # - command: scripts/check-version.sh
+  #   label: ":point_up:"
+  #
+  # - wait
+
+  # - command: scripts/deploy-github.sh
+  #   label: ":rocket: :github:"
+  #   env:
+  #     BUILDKITE_DOCKER_COMPOSE_CONTAINER: mysurrey-app-test
+  #   branches: master
+  #
+  # - command: scripts/deploy-dockerhub.sh
+  #   label: ":rocket: :docker:"
+  #   branches: master
+  #
+  # - wait
+
+  - command: scripts/deploy-cluster.sh
+    label: ":rocket: :node:"
+    agents:
+      - queue=deploy
+      - cluster=mysurrey-app
+      - env=test
+  #   branches: master
+  #
+  # - block: ":fire:"
+  #   branches: master
+
+  # - command: scripts/deploy-cluster.sh
+  #   label: ":rocket: :node:"
+  #   agents:
+  #     - queue=deploy
+  #     - cluster=mysurrey-app
+  #     - env=production
+  #   branches: master

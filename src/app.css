@@ -1,0 +1,10 @@
+html {
+  font-family: UniversLTStd, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #f7f7f7;
+}
